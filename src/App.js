@@ -1,23 +1,16 @@
-import logo from './logo.svg';
+import React from "react";
 import './App.css';
-
+import {ErrorBoundary} from 'react-error-boundary'
+import { FullPageErrorFallback, FullPageLoading } from "./components/lib.jsx";
+const AppProviders = React.lazy(()=> import('./context/index.jsx'))
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ErrorBoundary FallbackComponent={FullPageErrorFallback} onReset={()=>{}}>
+        <React.Suspense fallback={<FullPageLoading />}>
+          <AppProviders />
+        </React.Suspense>
+      </ErrorBoundary>
     </div>
   );
 }
