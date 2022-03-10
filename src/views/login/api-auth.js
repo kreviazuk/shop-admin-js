@@ -1,9 +1,6 @@
-import { http } from "../../utils/http";
-
-export const getToken = () => window.localStorage.getItem('token');
-
-export const login = (data) => http('api/admin/login' , {data,method:'post'})
-
-
-export const logout = async () =>
-  window.localStorage.removeItem('token');
+import axiosUtil from "../../utils/http";
+console.log('axiosUtil');
+console.log(axiosUtil);
+export function getTemporaryToken(data) {
+  return axiosUtil.axiosGet('/ss/token', data)
+}

@@ -1,5 +1,5 @@
-import { http } from "../../utils/http";
+// import { axiosUtil } from "../../utils/http";
 
-export const getGoods = () => http('api/goods/index' ,{method:'get'})
+// export const getGoods = () => axiosUtil.axiosGet('api/goods/index' ,{method:'get'})
 
-export const editGoods = (data) => http('api/goods/editGoods',{data,method:'post'})
+// export const editGoods = (data) => axiosUtil.axiosGet('api/goods/editGoods',{data,method:'post'})

@@ -1,30 +1,35 @@
 import React,{useContext}from "react";
 import { Form, Input,Button, message } from "antd";
-// import { login } from "./api-auth";
 import { AuthContext } from "../../context/auth-context";
-//import { useQuery } from "react-query";
-//import { login } from "./api-auth";
-//import { FullPageErrorFallback } from "../../components/lib";
+import {getTemporaryToken} from './api-auth'
+import UUID from "es6-uuid";
 
 export const LoginScreen = () => {
   const {state,dispatch} =  useContext(AuthContext)
-  console.log(state)
+  const key = UUID(32)
   const handleSubmit = async (values) => { 
     console.log(values)
     try{
-      // const user = await login(values)
       const user = {...values}
+      console.log(user)
       dispatch({type:'setUser',user})
     }catch(error){
       message.error(error.message);
     }
   }
-   
-  // const { status, error, data} = useQuery('login', handleSubmit,{enabled:false});
-  // console.log(status,data)
-  // if(status ==='error'){
-  //   return <div>{error.message}</div>
-  // }else{
+  // getTemporaryToken({ tokenKey: key }).then(res => {
+  //   console.log('res')
+  //   console.log(res)
+  // })
+  const tempToken = async () => {
+    console.log('我被执行了')
+    const res = await getTemporaryToken({ tokenKey: this.key })
+    console.log('res')
+    console.log(res)
+    return res
+  } 
+  // console.log('tempToken')
+  // console.log(tempToken)
   return (
     <Form onFinish={handleSubmit}>
       <Form.Item
@@ -46,4 +51,3 @@ export const LoginScreen = () => {
       </Form.Item>
     </Form>
   );}
-//};
