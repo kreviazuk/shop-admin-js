@@ -4,3 +4,6 @@ console.log(axiosUtil);
 export function getTemporaryToken(data) {
   return axiosUtil.axiosGet('/ss/token', data)
 }
+export function login(data) {
+  return axiosUtil.axiosPost('/ss/login', data)
+}

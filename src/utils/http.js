@@ -10,7 +10,7 @@ const axios = service.create({
 axios.defaults.withCredentials = true;
 // 跳转错误页面
 function goErrorPage(msg) {
-  sessionStorage.setItem("error", msg);
+  localStorage.setItem("error", msg);
   // router.push("/errorPage");
 }
 // 提示错误信息
@@ -25,6 +25,7 @@ let i = 0;
  **/
 axios.interceptors.request.use(
   (config) => {
+    config.url = process.env.REACT_APP_API_URL + config.url
     if (config.url.indexOf("/check/isExist") === -1) {
       i++;
     }
@@ -59,7 +60,7 @@ axios.interceptors.response.use(
   }
 );
 export default {
-  axiosGet(url, params) {
+  axiosGet( url, params) {
     console.log('我被调用了');
     if (!params) {
       params = {};
@@ -69,7 +70,7 @@ export default {
         .get(url + "?" + qs.stringify(paramsUtil.encodeParams(params)), {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
-            token: sessionStorage.getItem("token"),
+            token: localStorage.getItem("token"),
           },
         })
         .then((res) => {
@@ -89,7 +90,7 @@ export default {
         .post(url, paramsUtil.encodeParamsPost(params, files), {
           headers: {
             "Content-Type": "multipart/form-data",
-            token: sessionStorage.getItem("token"),
+            token: localStorage.getItem("token"),
           },
         })
         .then((res) => {
@@ -109,7 +110,7 @@ export default {
         .post(url, paramsUtil.encodeParamsPost(params), {
           headers: {
             "Content-Type": "multipart/form-data",
-            token: sessionStorage.getItem("token"),
+            token: localStorage.getItem("token"),
           },
           responseType: "arraybuffer",
         })
@@ -140,7 +141,7 @@ export default {
         .put(url, paramsUtil.encodeParamsPost(params, files), {
           headers: {
             "Content-Type": "multipart/form-data",
-            token: sessionStorage.getItem("token"),
+            token: localStorage.getItem("token"),
           },
         })
         .then((res) => {
@@ -160,7 +161,7 @@ export default {
         .delete(url + "?" + qs.stringify(paramsUtil.encodeParams(params)), {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
-            token: sessionStorage.getItem("token"),
+            token: localStorage.getItem("token"),
           },
         })
         .then((res) => {
