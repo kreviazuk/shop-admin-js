@@ -26,6 +26,7 @@ export const LoginScreen = () => {
       // console.log(user)
       const info = await login(ruleForm)
       const user = info.user
+      console.log(123)
       localStorage.setItem('token',info.token)
       dispatch({ type: 'setUser', user })
     } catch (error) {
