@@ -3,7 +3,6 @@ import { Form, Input, Button, message } from "antd";
 import { AuthContext } from "../../context/auth-context";
 import { getTemporaryToken, login } from './api-auth'
 import UUID from "es6-uuid";
-import { useQuery } from "react-query";
 import md5 from "md5";
 
 export const LoginScreen = () => {
